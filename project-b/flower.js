@@ -11,6 +11,13 @@ class Flower {
 
         this.isActive = false;
         this.activeTimer = 0;
+
+        // for the sound
+        this.osc = new p5.SinOsc();
+        this.envelope = new p5.Env();
+        this.envelope.setADSR(0.01, 0.2, 0.2, 0.5);
+        this.osc.start();
+        this.osc.amp(0);
     }
 
     display() {
@@ -56,4 +63,34 @@ class Flower {
         this.x = this.x0 + map(nx, 0, 1, -shake, shake);
         this.y = this.y0 + map(ny, 0, 1, -shake, shake);
     }
+    playFlower() {
+        let freq = notes[int(map(this.s, 5, 20, 0, notes.length - 1))];
+        this.osc.freq(freq);
+        this.envelope.play(this.osc, 0, 0.1);
+        console.log(int(map(this.s, 5, 20, 0, notes.length - 1)));
+    }
 }
+let notes = [
+    261.63, // C4
+    293.66, // D4
+    329.63, // E4
+    349.23, // F4
+    392.0, // G4
+    440.0, // A4
+    493.88, // B4
+    523.25, // C5
+    587.33, // D5
+    659.25, // E5
+    698.46, // F5
+    783.99, // G5
+    880.0, // A5
+    987.77, // B5
+    1046.5, // C6
+    1174.66, // D6
+    1318.51, // E6
+    1396.91, // F6
+    1567.98, // G6
+    1760.0, // A6
+    1975.53, // B6
+    2093.0, // C7
+];

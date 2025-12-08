@@ -3,13 +3,12 @@ class Bush {
         this.x = x;
         this.y = y;
         this.s = s;
+
+        this.bunny = new Bunny(this.x, this.y - this.s * 0.5);
+        // this.drop = new p5.SoundFile("sound/bush.mp3")
     }
     display() {
-        // noStroke();
-        // ellipse(this.x, this.y, this.s * 2, this.s * 0.9);
-        // ellipse(this.x, this.y - this.s * 0.4, this.s * 1.6, this.s * 0.7);
-        // ellipse(this.x, this.y - this.s * 0.8, this.s * 1.2, this.s * 0.55);
-
+        noStroke();
         fill(45, 60, 70);
         circle(this.x, this.y - this.s * 0.4, this.s * 1.2);
 
@@ -23,5 +22,8 @@ class Bush {
     }
     update() {
 
+    }
+    contain(mousex, mousey) {
+        return dist(mousex, mousey, this.x, this.y) < this.s;
     }
 }
